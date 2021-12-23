@@ -15,9 +15,13 @@ class TableGameModel(db.Model):
         self.type = type
         self.library_id = library_id
 
-    # TODO: add primary key
     def json(self):
-        return {'name': self.name, 'type': self.type, 'library_id': self.library_id}
+        return {
+            'id': self.id,
+            'name': self.name, 
+            'type': self.type, 
+            'library_id': self.library_id
+            }
 
     @classmethod
     def find_by_name(cls, name):
@@ -26,6 +30,10 @@ class TableGameModel(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     def save_to_db(self): #update or insert
         db.session.add(self)

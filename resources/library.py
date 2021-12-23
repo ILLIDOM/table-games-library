@@ -31,4 +31,4 @@ class Library(Resource):
 
 class LibraryList(Resource):
     def get(self):
-        return {'libraries': [library.json() for library in LibraryModel.query.all()]}
+        return {'libraries': [library.json() for library in LibraryModel.find_all()]}

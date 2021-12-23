@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 
 from resources.table_game import TableGame, TableGameList
 from resources.library import Library, LibraryList
+from resources.user import User, UserModel, UserRegister
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -21,6 +22,8 @@ api.add_resource(TableGame, '/table-game/<int:id>') #/table-game/1
 api.add_resource(TableGameList, '/table-games')
 api.add_resource(Library, '/library/<string:name>')
 api.add_resource(LibraryList, '/libraries')
+api.add_resource(User, '/user/<int:user_id>')
+api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
     from db import db

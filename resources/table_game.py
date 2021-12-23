@@ -53,4 +53,4 @@ class TableGame(Resource):
 
 class TableGameList(Resource):
     def get(self):
-        return {'table_games': [game.json() for game in TableGameModel.query.all()]}
+        return {'table_games': [game.json() for game in TableGameModel.find_all()]}

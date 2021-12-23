@@ -11,9 +11,12 @@ class LibraryModel(db.Model):
     def __init__(self, name):
         self.name = name
 
-    # TODO: add primary key
     def json(self): #is slower with lazy=dynamic (each time a db access)
-        return {'name': self.name, 'table-games': [x.json() for x in self.table_games.all()]}
+        return {
+            'id': self.id,
+            'name': self.name, 
+            'table-games': [x.json() for x in self.table_games.all()]
+            }
 
     @classmethod
     def find_by_name(cls, name):
@@ -22,6 +25,10 @@ class LibraryModel(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     def save_to_db(self): #update or insert
         db.session.add(self)
