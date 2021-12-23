@@ -1,18 +1,26 @@
 from flask import Flask
 from flask_restful import Api
-from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager
 
-from resources.table_game import TableGame
+from resources.table_game import TableGame, TableGameList
+from resources.library import Library, LibraryList
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.secret_key = 'mykey'
 api = Api(app)
+
+@app.before_first_request
+def create_tables():
+    db.create_all() #only creates tables associated with sql alchemy
+
 jwt = JWTManager(app)
 
-api.add_resource(TableGame, '/table-games/<int:id>') #/table-game/1
-#api.add_resource(Library, '/library')
+api.add_resource(TableGame, '/table-game/<int:id>') #/table-game/1
+api.add_resource(TableGameList, '/table-games')
+api.add_resource(Library, '/library/<string:name>')
+api.add_resource(LibraryList, '/libraries')
 
 if __name__ == '__main__':
     from db import db

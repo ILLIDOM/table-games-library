@@ -1,23 +1,19 @@
 from db import db
 
-class TableGameModel(db.Model):
-    __tablename__ = 'table_games'
+class LibraryModel(db.Model):
+    __tablename__ = 'library'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    type = db.Column(db.String(80))
 
-    library_id = db.Column(db.Integer, db.ForeignKey('library.id'))
-    library = db.relationship('LibraryModel')
+    table_games = db.relationship('TableGameModel', lazy='dynamic') #lazy=dynamic; dont create relationship obj directly
 
-    def __init__(self, name, type, library_id):
+    def __init__(self, name):
         self.name = name
-        self.type = type
-        self.library_id = library_id
 
     # TODO: add primary key
-    def json(self):
-        return {'name': self.name, 'type': self.type, 'library_id': self.library_id}
+    def json(self): #is slower with lazy=dynamic (each time a db access)
+        return {'name': self.name, 'table-games': [x.json() for x in self.table_games.all()]}
 
     @classmethod
     def find_by_name(cls, name):

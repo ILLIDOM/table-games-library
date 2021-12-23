@@ -3,7 +3,7 @@ from flask import request
 
 from models.table_game_model import TableGameModel
 
-# table game: (id, name, type, belongs_to, )
+# table game: (id, name, type, library_id)
 
 class TableGame(Resource):
     def get(self, id):
@@ -19,7 +19,7 @@ class TableGame(Resource):
             return {'message': f"item with id {id} already exists"}, 400
 
         data = request.get_json() # throws error if empty or no valid json
-        table_game = TableGameModel(data['name'], data['type'])
+        table_game = TableGameModel(data['name'], data['type'], data['library_id'])
 
         try:
             table_game.save_to_db()
@@ -41,10 +41,16 @@ class TableGame(Resource):
         table_game = TableGameModel.find_by_id(id)
 
         if table_game is None:
-            table_game = TableGameModel(data['name'], data['type'])
+            table_game = TableGameModel(data['name'], data['type'], data['library_id'])
         else:
             table_game.name = data['name']
             table_game.type = data['type']
+            table_game.library_id = data['library_id']
 
         table_game.save_to_db()
         return table_game.json(), 200
+
+
+class TableGameList(Resource):
+    def get(self):
+        return {'table_games': [game.json() for game in TableGameModel.query.all()]}
