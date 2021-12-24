@@ -1,5 +1,8 @@
 __pycache__/
 
+# vscode
+.vscode
+
 # Flask stuff:
 instance/
 .webassets-cache
