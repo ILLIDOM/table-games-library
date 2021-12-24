@@ -1,11 +1,13 @@
 from flask_restful import Resource
 from flask import request
+from flask_jwt_extended import jwt_required
 
 from models.table_game_model import TableGameModel
 
 # table game: (id, name, type, library_id)
 
 class TableGame(Resource):
+    @jwt_required()
     def get(self, id):
         table_game = TableGameModel.find_by_id(id)
         if table_game:

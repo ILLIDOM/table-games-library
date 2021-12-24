@@ -4,12 +4,12 @@ from flask_jwt_extended import JWTManager
 
 from resources.table_game import TableGame, TableGameList
 from resources.library import Library, LibraryList
-from resources.user import User, UserModel, UserRegister
+from resources.user import User, UserRegister, UserLogin
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-app.secret_key = 'mykey'
+app.config['JWT_SECRET_KEY'] = 'mykey'
 api = Api(app)
 
 @app.before_first_request
@@ -24,6 +24,7 @@ api.add_resource(Library, '/library/<string:name>')
 api.add_resource(LibraryList, '/libraries')
 api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserRegister, '/register')
+api.add_resource(UserLogin, '/login')
 
 if __name__ == '__main__':
     from db import db
