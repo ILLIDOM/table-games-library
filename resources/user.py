@@ -2,10 +2,13 @@ from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import (
     create_access_token,
-    create_refresh_token
+    create_refresh_token,
+    jwt_required,
+    get_jwt
 )
 
 from models.user_model import UserModel
+from blocklist import JWT_BLOCKLIST
 
 # endpoint for user creation
 class UserRegister(Resource):
@@ -37,6 +40,14 @@ class UserLogin(Resource):
             }, 200
 
         return {'message': 'invalid credentials'}, 401 #unauthorized
+
+
+class UserLogout(Resource):
+    @jwt_required()
+    def post(self):
+        jti = get_jwt()['jti']
+        JWT_BLOCKLIST.add(jti)
+        return {'message': 'Successfully logged out'}, 200
 
 
 # endpoint to manage user
