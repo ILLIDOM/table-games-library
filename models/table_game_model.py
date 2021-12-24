@@ -1,25 +1,30 @@
 from db import db
 
 class TableGameModel(db.Model):
-    __tablename__ = 'table_games'
+    __tablename__ = 'table_game'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     type = db.Column(db.String(80))
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('UserModel')
+
     library_id = db.Column(db.Integer, db.ForeignKey('library.id'))
     library = db.relationship('LibraryModel')
 
-    def __init__(self, name, type, library_id):
+    def __init__(self, name, type, user_id, library_id):
         self.name = name
         self.type = type
+        self.user_id = user_id
         self.library_id = library_id
 
     def json(self):
         return {
             'id': self.id,
             'name': self.name, 
-            'type': self.type, 
+            'type': self.type,
+            'user_id': self.user_id, 
             'library_id': self.library_id
             }
 

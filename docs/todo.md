@@ -1,7 +1,8 @@
 # Todo
 
 - table games bound to user id (if one user requests all TableGameList -> he only sees his games)
-- adjust db to save id of user to table game item
 - get library contains all table games of all users 
-- user redis for revoked jwt https://flask-jwt-extended.readthedocs.io/en/stable/blocklist_and_token_revoking/
+- use redis for revoked jwt https://flask-jwt-extended.readthedocs.io/en/stable/blocklist_and_token_revoking/
+- use postgresql for data storage
 - add sql migrations (alembic)
+- have a look at flask-marshmallow

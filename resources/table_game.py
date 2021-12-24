@@ -1,3 +1,4 @@
+from flask_jwt_extended.utils import get_jwt, get_jwt_identity
 from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import jwt_required
@@ -16,12 +17,15 @@ class TableGame(Resource):
             return {'message': 'item not found'}, 404
 
 
+    @jwt_required()
     def post(self, id):
         if TableGameModel.find_by_id(id):
             return {'message': f"item with id {id} already exists"}, 400
 
         data = request.get_json() # throws error if empty or no valid json
-        table_game = TableGameModel(data['name'], data['type'], data['library_id'])
+        # get user_id from jwt
+        user_id = get_jwt_identity()
+        table_game = TableGameModel(data['name'], data['type'], user_id, data['library_id'])
 
         try:
             table_game.save_to_db()
