@@ -10,7 +10,8 @@ from blocklist import JWT_BLOCKLIST
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@172.17.28.198:5432/table_game_library'
 app.config['JWT_SECRET_KEY'] = 'mykey'
 api = Api(app)
 

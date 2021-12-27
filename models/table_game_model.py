@@ -8,10 +8,10 @@ class TableGameModel(db.Model):
     type = db.Column(db.String(80))
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('UserModel')
+    #user = db.relationship('UserModel', back_populates='table_games')
 
     library_id = db.Column(db.Integer, db.ForeignKey('library.id'))
-    library = db.relationship('LibraryModel')
+    #library = db.relationship('LibraryModel', back_populates='table_games')
 
     def __init__(self, name, type, user_id, library_id):
         self.name = name
@@ -33,8 +33,8 @@ class TableGameModel(db.Model):
         return cls.query.filter_by(name=name).first() #SELECT * FROM table_games WHERE name = name LIMIT 1
 
     @classmethod
-    def find_by_id(cls, id):
-        return cls.query.filter_by(id=id).first()
+    def find_by_id(cls, _id):
+        return cls.query.filter_by(id=_id).first()
 
     @classmethod
     def find_all(cls):

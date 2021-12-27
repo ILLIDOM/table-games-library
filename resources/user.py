@@ -14,12 +14,15 @@ from blocklist import JWT_BLOCKLIST
 class UserRegister(Resource):
     def post(self):
         data = request.get_json() # throws error if empty or no valid json
-
         if UserModel.find_by_username(data['username']):
             return {"message": "A user with that username already exists"}, 400
 
         user = UserModel(data['username'], data['password'])
-        user.save_to_db()
+
+        try:
+            user.save_to_db()
+        except:
+            return {'message': 'error occured during insert'}, 500
 
         return {"message": "User created successfully."}, 201
 
@@ -51,19 +54,19 @@ class UserLogout(Resource):
 
 
 # endpoint to manage user
-class User(Resource):
-    @classmethod
-    def get(cls, user_id):
-        user = UserModel.find_by_id(user_id)
-        if not user:
-            return {'message': 'user not found'}, 404
-        return user.json()
+# class User(Resource):
+#     @classmethod
+#     def get(cls, user_id):
+#         user = UserModel.find_by_id(user_id)
+#         if not user:
+#             return {'message': 'user not found'}, 404
+#         return user.json()
 
-    @classmethod
-    def delete(cls, user_id):
-        user = UserModel.find_by_id(user_id)
-        if not user:
-            return {'message': 'user not found'}, 404
+#     @classmethod
+#     def delete(cls, user_id):
+#         user = UserModel.find_by_id(user_id)
+#         if not user:
+#             return {'message': 'user not found'}, 404
 
-        user.delete_from_db()
-        return {'message': 'user deleted'}, 200
+#         user.delete_from_db()
+#         return {'message': 'user deleted'}, 200
