@@ -14,11 +14,7 @@ app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
 api = Api(app)
 migrate = Migrate(app, db)
-
-
-@app.before_first_request
-def create_tables():
-    db.create_all() #only creates tables associated with sql alchemy
+db.init_app(app)
 
 jwt = JWTManager(app)
 
@@ -36,5 +32,4 @@ api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 
 if __name__ == '__main__':
-    db.init_app(app)
     app.run(port=5000)
