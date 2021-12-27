@@ -1,4 +1,4 @@
-from database import db
+from application import db
 
 class TableGameModel(db.Model):
     __tablename__ = 'table_game'

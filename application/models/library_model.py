@@ -1,4 +1,4 @@
-from database import db
+from application import db
 
 class LibraryModel(db.Model):
     __tablename__ = 'library'

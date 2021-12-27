@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from models.library_model import LibraryModel
+from application.models.library_model import LibraryModel
 
 class Library(Resource):
     def get(self, name):
