@@ -1,5 +1,4 @@
-from types import ClassMethodDescriptorType
-from db import db
+from database import db
 
 class TableGameModel(db.Model):
     __tablename__ = 'table_game'

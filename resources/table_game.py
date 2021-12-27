@@ -1,11 +1,9 @@
-from flask_jwt_extended.utils import get_jwt, get_jwt_identity
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import jwt_required
 
 from models.table_game_model import TableGameModel
-
-# table game: (id, name, type, library_id)
 
 class TableGame(Resource):
     @jwt_required()
