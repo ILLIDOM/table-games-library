@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import (
@@ -16,8 +17,8 @@ class UserRegister(Resource):
         data = request.get_json() # throws error if empty or no valid json
         if UserModel.find_by_username(data['username']):
             return {"message": "A user with that username already exists"}, 400
-
-        user = UserModel(data['username'], data['password'])
+        password = generate_password_hash(data['password'])
+        user = UserModel(data['username'], password)
 
         try:
             user.save_to_db()
@@ -33,7 +34,7 @@ class UserLogin(Resource):
         user = UserModel.find_by_username(data['username'])
 
         #check password
-        if user and user.password == data['password']:
+        if user and check_password_hash(user.password, data['password']):
             # create access token
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
