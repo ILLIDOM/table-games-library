@@ -11,9 +11,8 @@ migrate = Migrate()
 api = Api()
 jwt = JWTManager()
 
-
+''''FACTORY METHOD'''
 def create_app():
-    '''Initalize core application'''
     app = Flask(__name__)
     app.config.from_object('config.DevelopmentConfig')
 
@@ -26,12 +25,12 @@ def create_app():
 def initialize_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
-    initialize_api(api)
+    register_api(api) # api needs to be registered before api.init_app() is called
     api.init_app(app)
     jwt.init_app(app)
 
 
-def initialize_api(api):
+def register_api(api):
     from application.resources.table_game import TableGame, TableGameList
     from application.resources.library import Library, LibraryList
     from application.resources.user import UserRegister, UserLogin, UserLogout
