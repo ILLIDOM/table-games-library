@@ -1,3 +1,4 @@
+from types import ClassMethodDescriptorType
 from db import db
 
 class TableGameModel(db.Model):
@@ -39,6 +40,10 @@ class TableGameModel(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
+
+    @classmethod
+    def find_all_from_current_user(cls, _id):
+        return cls.query.filter_by(user_id=_id).all()
 
     def save_to_db(self): #update or insert
         db.session.add(self)

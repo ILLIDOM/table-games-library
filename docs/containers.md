@@ -1,7 +1,7 @@
 #
 # DB
 1. Run postgresql in container ``docker run --name some-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:14``
-2. Connecto to shell of container
+2. Connec to to shell of container
 3. open psql shell ``psql -U postgres``
 4. create db ``CREATE DATABASE table_game_libarary;``
 

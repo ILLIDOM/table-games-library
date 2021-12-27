@@ -42,12 +42,14 @@ class TableGame(Resource):
 
         return {'message': 'item deleted'}, 200
 
+    @jwt_required()
     def put(self, id):
         data = request.get_json()
         table_game = TableGameModel.find_by_id(id)
+        user_id = get_jwt_identity()
 
         if table_game is None:
-            table_game = TableGameModel(data['name'], data['type'], data['library_id'])
+            table_game = TableGameModel(data['name'], data['type'], user_id, data['library_id'])
         else:
             table_game.name = data['name']
             table_game.type = data['type']
@@ -58,5 +60,7 @@ class TableGame(Resource):
 
 
 class TableGameList(Resource):
+    @jwt_required()
     def get(self):
-        return {'table_games': [game.json() for game in TableGameModel.find_all()]}
+        user_id = get_jwt_identity()
+        return {'table_games': [game.json() for game in TableGameModel.find_all_from_current_user(user_id)]}

@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 
 from resources.table_game import TableGame, TableGameList
 from resources.library import Library, LibraryList
-from resources.user import User, UserRegister, UserLogin, UserLogout
+from resources.user import UserRegister, UserLogin, UserLogout
 from blocklist import JWT_BLOCKLIST
 
 
@@ -30,7 +30,7 @@ api.add_resource(TableGame, '/table-game/<int:id>') #/table-game/1
 api.add_resource(TableGameList, '/table-games')
 api.add_resource(Library, '/library/<string:name>')
 api.add_resource(LibraryList, '/libraries')
-api.add_resource(User, '/user/<int:user_id>')
+#api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
