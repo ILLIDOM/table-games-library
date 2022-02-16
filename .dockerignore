@@ -1,0 +1,11 @@
+#specific
+venv
+application/migrations
+.vscode
+
+# general python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python

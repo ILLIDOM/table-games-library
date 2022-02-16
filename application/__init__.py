@@ -11,7 +11,7 @@ migrate = Migrate()
 api = Api()
 jwt = JWTManager()
 
-''''FACTORY METHOD'''
+'''FACTORY METHOD'''
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.DevelopmentConfig')
@@ -26,6 +26,13 @@ def initialize_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     register_api(api) # api needs to be registered before api.init_app() is called
+
+    # api call for testing if app is running
+    # remove and make nicer
+    @app.route('/', methods=['GET'])
+    def home():
+        return "APP is running"
+
     api.init_app(app)
     jwt.init_app(app)
 
