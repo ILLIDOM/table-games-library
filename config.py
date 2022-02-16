@@ -2,7 +2,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = 'mykey'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@172.17.28.198:5432/table_game_library'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@172.21.226.227:5432/table_game_library' # use IP of WSL
 
 class ProductionConfig(Config):
     pass

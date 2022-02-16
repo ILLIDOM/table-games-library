@@ -5,6 +5,7 @@
 4. create db ``CREATE DATABASE table_game_libarary;``
 
 ## query tables
+- ``\l`` list all databases
 - ``\dt`` see all tables
 - ``\d <table-name>`` see table structure
 - query users: ``select * from public.user;`` important to use public because .user is also an internal table
