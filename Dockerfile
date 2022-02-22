@@ -6,7 +6,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# dependencies for sql alchemy
+# dependencies for sql alchemy -> check if necessary
 RUN \
  apk add --no-cache bash && \
  apk add --no-cache postgresql-libs && \
