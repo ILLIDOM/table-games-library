@@ -9,3 +9,6 @@ Family Table Games Library
 ## running app
 - for dev use ``python wsgi.py``
 - for prod use ``gunicorn -b <ip>:<port> --workers <num> wsgi:app``
+
+## build docker image
+- ``docker build -t dominique123456789/tlg-flask .``

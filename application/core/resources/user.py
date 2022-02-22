@@ -8,8 +8,8 @@ from flask_jwt_extended import (
     get_jwt
 )
 
-from application.models.user_model import UserModel
-from application.blocklist import JWT_BLOCKLIST
+from core.models.user_model import UserModel
+from core.blocklist import JWT_BLOCKLIST
 
 # endpoint for user creation
 class UserRegister(Resource):

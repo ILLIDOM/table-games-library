@@ -1,5 +1,5 @@
 FROM python:3.10.2-alpine
-COPY . /app
+COPY ./application /app
 WORKDIR /app
 
 # set environment variables
@@ -12,6 +12,7 @@ RUN \
  apk add --no-cache postgresql-libs && \
  apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
 
+# install required modules
 RUN pip install -r ./requirements.txt
 
 EXPOSE 5000

@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
-from application.blocklist import JWT_BLOCKLIST
+from core.blocklist import JWT_BLOCKLIST
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -38,9 +38,9 @@ def initialize_extensions(app):
 
 
 def register_api(api):
-    from application.resources.table_game import TableGame, TableGameList
-    from application.resources.library import Library, LibraryList
-    from application.resources.user import UserRegister, UserLogin, UserLogout
+    from core.resources.table_game import TableGame, TableGameList
+    from core.resources.library import Library, LibraryList
+    from core.resources.user import UserRegister, UserLogin, UserLogout
 
     api.add_resource(TableGame, '/table-game/<int:id>')
     api.add_resource(TableGameList, '/table-games')

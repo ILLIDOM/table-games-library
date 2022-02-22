@@ -1,4 +1,4 @@
-from application import db
+from core import db
 
 class UserModel(db.Model):
     __tablename__ = 'user'
