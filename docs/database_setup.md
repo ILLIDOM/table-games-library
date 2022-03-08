@@ -14,3 +14,9 @@
 1. init flask-migrate ``flask db init``
 2. migrate schema ``flask db migrate -m "message"``
 3. upgrade db to new schema ``flask db upgrade``
+
+## Backup/Restore Database (psql)
+1. Dump into file on local machine from docker container: 
+``docker exec -i pg_container_name /bin/bash -c "PGPASSWORD=pg_password pg_dump --username pg_username database_name" > /desired/path/on/your/machine/dump.sql``
+2. Backup dump into container
+``docker exec -i pg_container_name /bin/bash -c "PGPASSWORD=pg_password psql --username pg_username database_name" < /path/on/your/machine/dump.sql``
