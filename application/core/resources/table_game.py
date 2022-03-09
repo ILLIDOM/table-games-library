@@ -14,25 +14,7 @@ class TableGame(Resource):
         else:
             return {'message': 'item not found'}, 404
 
-
     @jwt_required()
-    def post(self, id):
-        if TableGameModel.find_by_id(id):
-            return {'message': f"item with id {id} already exists"}, 400
-
-        data = request.get_json() # throws error if empty or no valid json
-        # get user_id from jwt
-        user_id = get_jwt_identity()
-        table_game = TableGameModel(data['name'], data['type'], user_id, data['library_id'])
-
-        try:
-            table_game.save_to_db()
-        except:
-            return {'message': 'error occured during insert'}, 500
-
-        return table_game.json(), 201
-
-
     def delete(self, id):
         table_game = TableGameModel.find_by_id(id)
         if table_game:
@@ -62,3 +44,20 @@ class TableGameList(Resource):
     def get(self):
         user_id = get_jwt_identity()
         return {'table_games': [game.json() for game in TableGameModel.find_all_from_current_user(user_id)]}
+
+    @jwt_required()
+    def post(self):
+        # if TableGameModel.find_by_id(id):
+        #     return {'message': f"item with id {id} already exists"}, 400
+
+        data = request.get_json() # throws error if empty or no valid json
+        # get user_id from jwt
+        user_id = get_jwt_identity()
+        table_game = TableGameModel(data['name'], data['type'], user_id, data['library_id'])
+
+        try:
+            table_game.save_to_db()
+        except:
+            return {'message': 'error occured during insert'}, 500
+
+        return table_game.json(), 201
