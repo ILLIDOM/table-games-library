@@ -9,7 +9,7 @@ from flask_jwt_extended import (
 )
 
 from core.models.user_model import UserModel
-from core.blocklist import JWT_BLOCKLIST
+from core import JWT_BLOCKLIST
 
 # endpoint for user creation
 class UserRegister(Resource):

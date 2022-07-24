@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
-from core.blocklist import JWT_BLOCKLIST
+JWT_BLOCKLIST = set()
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -12,9 +12,10 @@ api = Api()
 jwt = JWTManager()
 
 '''FACTORY METHOD'''
-def create_app():
+# config can be object or string
+def create_app(config='config.DevelopmentConfig'):
     app = Flask(__name__)
-    app.config.from_object('config.DevelopmentConfig')
+    app.config.from_object(config)
 
     with app.app_context():
         #Incldue API routes
