@@ -1,28 +1,28 @@
 from core.models.user_model import UserModel
 
-def test_home_page(test_client):
+def test_home_page(client):
     """
     
     """
-    response = test_client.get('/')
+    response = client.get('/')
     assert response.status_code == 200
     assert b"APP is running"
 
 
-def test_user_schema_1(session):
+def test_user_schema_1(db):
     user = UserModel('domi', 'mypassword')
     
-    session.add(user)
-    session.commit()
+    db.session.add(user)
+    db.session.commit()
 
     assert user.id == 1
     assert user.username == 'domi'
 
-def test_user_schema_2(session):
+def test_user_schema_2(db):
     user = UserModel('timi', 'mypassword')
     
-    session.add(user)
-    session.commit()
+    db.session.add(user)
+    db.session.commit()
 
     assert user.id == 2
     assert user.username == 'timi'

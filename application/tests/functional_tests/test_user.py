@@ -1,5 +1,5 @@
-def test_register(test_client):
-    response = test_client.post('/register', json={
+def test_register(client, db):
+    response = client.post('/register', json={
         "username": "Hans",
         "password": "mypassword"
     })
@@ -7,8 +7,8 @@ def test_register(test_client):
     assert response.json["message"] == 'User created successfully.'
 
 
-def test_valid_login(test_client):
-    response = test_client.post('/login', json={
+def test_valid_login(client, db):
+    response = client.post('/login', json={
         "username": "Hans",
         "password": "mypassword"
     })
@@ -17,8 +17,8 @@ def test_valid_login(test_client):
     assert response.json["refresh_token"] != ""
 
 
-def test_invalid_login_non_existent_user(test_client):
-    response = test_client.post('/login', json={
+def test_invalid_login_non_existent_user(client, db):
+    response = client.post('/login', json={
         "username": "hahah",
         "password": " "
     })
@@ -26,8 +26,8 @@ def test_invalid_login_non_existent_user(test_client):
     assert response.json["message"] == "invalid credentials"
 
 
-def test_invalid_login_wrong_password(test_client):
-    response = test_client.post('/login', json={
+def test_invalid_login_wrong_password(client, db):
+    response = client.post('/login', json={
         "username": "Hans",
         "password": "wrongpassword"
     })
