@@ -45,7 +45,7 @@ def register_api(api):
 
     api.add_resource(TableGame, '/table-game/<int:id>')
     api.add_resource(TableGameList, '/table-games')
-    api.add_resource(Library, '/library/<string:name>')
+    api.add_resource(Library, '/library/<int:id>')
     api.add_resource(LibraryList, '/libraries')
     api.add_resource(UserRegister, '/register')
     api.add_resource(UserLogin, '/login')
