@@ -17,6 +17,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = 'mykey'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 
 class TestingConfig(Config):
     TESTING = True
