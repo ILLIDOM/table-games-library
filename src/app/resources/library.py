@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from core.models.library_model import LibraryModel
+from app.models.library_model import LibraryModel
 
 class Library(Resource):
     def get(self, id):

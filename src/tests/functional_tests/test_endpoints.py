@@ -1,4 +1,4 @@
-from core.models.user_model import UserModel
+from app.models.user_model import UserModel
 
 def test_home_page(client):
     """

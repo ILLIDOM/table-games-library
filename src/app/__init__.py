@@ -39,9 +39,9 @@ def initialize_extensions(app):
 
 
 def register_api(api):
-    from core.resources.table_game import TableGame, TableGameList
-    from core.resources.library import Library, LibraryList
-    from core.resources.user import UserRegister, UserLogin, UserLogout
+    from app.resources.table_game import TableGame, TableGameList
+    from app.resources.library import Library, LibraryList
+    from app.resources.user import UserRegister, UserLogin, UserLogout
 
     api.add_resource(TableGame, '/table-game/<int:id>')
     api.add_resource(TableGameList, '/table-games')

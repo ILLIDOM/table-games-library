@@ -1,7 +1,7 @@
 import os
 import pytest
-from core import create_app
-from core import db as _db
+from app import create_app
+from app import db as _db
 
 
 @pytest.fixture(scope='session')

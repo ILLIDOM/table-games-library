@@ -1,5 +1,5 @@
-from core.models.user_model import UserModel
-from core.models.table_game_model import TableGameModel
+from app.models.user_model import UserModel
+from app.models.table_game_model import TableGameModel
 
 def test_new_user():
     """
