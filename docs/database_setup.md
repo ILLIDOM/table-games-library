@@ -1,8 +1,12 @@
-# DB
+# DB - PostgreSQL
 1. Run postgresql in container ``docker run --name some-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:14``
 2. Connec to to shell of container
 3. open psql shell ``psql -U postgres``
 4. create db ``CREATE DATABASE table_game_libarary;``
+
+# DB - Sqlite
+1. run flask db commands (init, migrate, upgrade) -> creates new empty db with correct schema
+2. fill in dummy data
 
 ## query tables
 - ``\l`` list all databases

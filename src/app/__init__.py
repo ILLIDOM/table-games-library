@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
-from core.blocklist import JWT_BLOCKLIST
+JWT_BLOCKLIST = set()
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -12,9 +12,10 @@ api = Api()
 jwt = JWTManager()
 
 '''FACTORY METHOD'''
-def create_app():
+# config can be object or string
+def create_app(config='config.DevelopmentConfig'):
     app = Flask(__name__)
-    app.config.from_object('config.DevelopmentConfig')
+    app.config.from_object(config)
 
     with app.app_context():
         #Incldue API routes
@@ -38,13 +39,13 @@ def initialize_extensions(app):
 
 
 def register_api(api):
-    from core.resources.table_game import TableGame, TableGameList
-    from core.resources.library import Library, LibraryList
-    from core.resources.user import UserRegister, UserLogin, UserLogout
+    from app.resources.table_game import TableGame, TableGameList
+    from app.resources.library import Library, LibraryList
+    from app.resources.user import UserRegister, UserLogin, UserLogout
 
     api.add_resource(TableGame, '/table-game/<int:id>')
     api.add_resource(TableGameList, '/table-games')
-    api.add_resource(Library, '/library/<string:name>')
+    api.add_resource(Library, '/library/<int:id>')
     api.add_resource(LibraryList, '/libraries')
     api.add_resource(UserRegister, '/register')
     api.add_resource(UserLogin, '/login')
